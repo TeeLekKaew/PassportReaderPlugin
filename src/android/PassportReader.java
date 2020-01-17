@@ -36,7 +36,7 @@ public class PassportReader extends CordovaPlugin {
     }
 }
 
-public class Dog {
+class Dog {
     private String name;
     private Integer age;
 
