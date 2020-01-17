@@ -15,7 +15,7 @@ public class PassportReader extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("coolMethod")) {
             JSONObject obj = args.getJSONObject(0);// .getString(0);
-            Dog1 dog = new Dog1(obj.getString("name"), obj.getInt("age"));
+            Dog dog = new Dog(obj.getString("name"), obj.getInt("age"));
 
 
             this.coolMethod(dog, callbackContext);
@@ -24,43 +24,15 @@ public class PassportReader extends CordovaPlugin {
         return false;
     }
 
-    private void coolMethod(Dog1 dog, CallbackContext callbackContext) {
+    private void coolMethod(Dog dog, CallbackContext callbackContext) {
         if (dog != null) {
             Gson gson = new Gson();
 
             String stringDog = gson.toJson(dog);
-            String strDogName = dog.getName();
 
-
-            callbackContext.success(strDogName + " : " + stringDog);
+            callbackContext.success(stringDog);
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
-    }
-}
-
-class Dog1 {
-    private String name;
-    private Integer age;
-
-    public Dog1(String name, Integer age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 }
