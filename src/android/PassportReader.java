@@ -7,8 +7,6 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import th.co.bbtec.cordova.plugin.Dog;
-
 
 
 public class PassportReader extends CordovaPlugin {
@@ -35,5 +33,31 @@ public class PassportReader extends CordovaPlugin {
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
+    }
+}
+
+public class Dog {
+    private String name;
+    private Integer age;
+
+    public Dog(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
