@@ -28,9 +28,11 @@ public class PassportReader extends CordovaPlugin {
         if (dog != null) {
             Gson gson = new Gson();
 
-            String stringDog = gson.toJson(dog.toString(), Dog1.class);
+            // String stringDog = gson.toJson(dog.toString(), Dog1.class);
+            String strDogName = dog.getName();
 
-            callbackContext.success(stringDog);
+
+            callbackContext.success(strDogName);
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
