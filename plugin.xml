@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" 
+id="cordova-plugin-passportreader" version="1.0.0">
+   <name>PassportReader</name>
+   <js-module name="PassportReader" src="www/PassportReader.js">
+      <clobbers target="PassportReader" />
+   </js-module>
+   <platform name="android">
+        <!-- copy build extras, necessary for wikitude.aar -->
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+
+      <config-file parent="/*" target="res/xml/config.xml">
+         <feature name="PassportReader">
+            <param name="android-package" value="th.co.bbtec.cordova.plugin.PassportReader" />
+         </feature>
+      </config-file>
+      <config-file parent="/*" target="AndroidManifest.xml" />
+      <source-file src="src/android/PassportReader.java" target-dir="src/th/co/bbtec/cordova/plugin/PassportReader" />
+   </platform>
+</plugin>
