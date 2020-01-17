@@ -28,7 +28,7 @@ public class PassportReader extends CordovaPlugin {
         if (dog != null) {
             Gson gson = new Gson();
 
-            String stringDog = gson.toJson(dog.toString(), Dog.class);
+            String stringDog = gson.toJson(dog.toString(), Dog1.class);
 
             callbackContext.success(stringDog);
         } else {
