@@ -74,7 +74,7 @@ public class PassportReader extends CordovaPlugin {
                     // Snackbar.make(passportNumberView, R.string.error_input, Snackbar.LENGTH_SHORT).show();
                 }
             }else{
-                Log.e(TAG, "onNewIntent > NOT contain android.nfc.tech.IsoDep");
+                // Log.e(TAG, "onNewIntent > NOT contain android.nfc.tech.IsoDep");
                 callbackContext.error("NOT contain android.nfc.tech.IsoDep");
             }
 
