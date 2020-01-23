@@ -8,9 +8,13 @@ import android.nfc.tech.IsoDep;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.jmrtd.BACKey;
+import org.jmrtd.BACKeySpec;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
 
 
 public class PassportReader extends CordovaPlugin {
@@ -27,10 +31,10 @@ public class PassportReader extends CordovaPlugin {
 
             JSONObject obj = args.getJSONObject(0);// .getString(0);
             PassportData passportData = new PassportData(
-                obj.getString("id"),
-                obj.getString("passportNumber"),
-                obj.getString("expirationDate"),
-                obj.getString("birthDate"));
+                    obj.getString("id"),
+                    obj.getString("passportNumber"),
+                    obj.getString("expirationDate"),
+                    obj.getString("birthDate"));
 
 
             this.readPassport(passportData, callbackContext);
@@ -57,13 +61,14 @@ public class PassportReader extends CordovaPlugin {
 
             if (Arrays.asList(tag.getTechList()).contains("android.nfc.tech.IsoDep")) {
                 // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-                // String passportNumber = preferences.getString(KEY_PASSPORT_NUMBER, null);
-                // String expirationDate = convertDate(preferences.getString(KEY_EXPIRATION_DATE, null));
-                // String birthDate = convertDate(preferences.getString(KEY_BIRTH_DATE, null));
+                 String passportNumber = passportData.getPassportNumber();
+                 String expirationDate = passportData.getExpirationDate();
+                 String birthDate = passportData.getBirthDate();
+
                 if (passportData.getPassportNumber() != null && !passportData.getPassportNumber().isEmpty()
                         && passportData.getExpirationDate() != null && !passportData.getExpirationDate().isEmpty()
                         && passportData.getBirthDate() != null && !passportData.getBirthDate().isEmpty()) {
-            
+
                     BACKeySpec bacKey = new BACKey(passportNumber, birthDate, expirationDate);
                     // new ReadTask(IsoDep.get(tag), bacKey).execute();
                     // mainLayout.setVisibility(View.GONE);
@@ -78,7 +83,7 @@ public class PassportReader extends CordovaPlugin {
                 callbackContext.error("NOT contain android.nfc.tech.IsoDep");
             }
 
-            
+
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
