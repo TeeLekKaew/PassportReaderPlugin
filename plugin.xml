@@ -15,6 +15,14 @@ id="cordova-plugin-passportreader" version="1.0.0">
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
+
+              <!-- add permissions and requirements -->
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.NFC" />
+            <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
+        </config-file>
+
       <source-file src="src/android/PassportReader.java" target-dir="src/th/co/bbtec/cordova/plugin/PassportReader" />
    </platform>
 </plugin>
