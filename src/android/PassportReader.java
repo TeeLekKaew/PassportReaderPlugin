@@ -57,9 +57,10 @@ public class PassportReader extends CordovaPlugin {
 
     private void readPassport(PassportData passportData, CallbackContext callbackContext) {
         if (passportData != null) {
-            Tag tag = passportData.getTag();
+//            Tag tag = passportData.getTag();
 
-            if (Arrays.asList(tag.getTechList()).contains("android.nfc.tech.IsoDep")) {
+//            if (Arrays.asList(tag.getTechList()).contains("android.nfc.tech.IsoDep")) {
+//            if (Arrays.asList(tag.getTechList()).contains("android.nfc.tech.IsoDep")) {
                 // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                  String passportNumber = passportData.getPassportNumber();
                  String expirationDate = passportData.getExpirationDate();
@@ -78,10 +79,10 @@ public class PassportReader extends CordovaPlugin {
                     callbackContext.error("Please provide details to read passport");
                     // Snackbar.make(passportNumberView, R.string.error_input, Snackbar.LENGTH_SHORT).show();
                 }
-            }else{
-                // Log.e(TAG, "onNewIntent > NOT contain android.nfc.tech.IsoDep");
-                callbackContext.error("NOT contain android.nfc.tech.IsoDep");
-            }
+//            }else{
+//                // Log.e(TAG, "onNewIntent > NOT contain android.nfc.tech.IsoDep");
+//                callbackContext.error("NOT contain android.nfc.tech.IsoDep");
+//            }
 
 
         } else {
