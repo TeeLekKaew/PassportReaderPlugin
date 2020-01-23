@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
+import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -14,7 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Locale;
 
 
 public class PassportReader extends CordovaPlugin {
@@ -63,8 +67,8 @@ public class PassportReader extends CordovaPlugin {
 //            if (Arrays.asList(tag.getTechList()).contains("android.nfc.tech.IsoDep")) {
                 // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                  String passportNumber = passportData.getPassportNumber();
-                 String expirationDate = passportData.getExpirationDate();
-                 String birthDate = passportData.getBirthDate();
+                 String expirationDate = convertDate(passportData.getExpirationDate());
+                 String birthDate = convertDate(passportData.getBirthDate());
 
                 if (passportData.getPassportNumber() != null && !passportData.getPassportNumber().isEmpty()
                         && passportData.getExpirationDate() != null && !passportData.getExpirationDate().isEmpty()
@@ -90,6 +94,17 @@ public class PassportReader extends CordovaPlugin {
         }
     }
 
+    private static String convertDate(String input) {
+        if (input == null) {
+            return null;
+        }
+        try {
+            return new SimpleDateFormat("yyMMdd", Locale.US)
+                    .format(new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(input));
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 
 }
 
